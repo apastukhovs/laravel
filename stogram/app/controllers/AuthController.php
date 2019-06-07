@@ -37,12 +37,21 @@ class AuthController extends BaseController
         if(Auth::attempt(array(
             'email' => Input::get('email'),
             'password' => Input::get('password')
-        )))
+        ))) 
         {
             return Redirect::to('/');
         }
 
         return Redirect::action('AuthController@showLoginForm');
     }    
+
+    public function logout()
+    {
+        if (Auth::check())
+        {
+            Auth::logout();
+        }
+        return Redirect::action('HomeController@showIndex');
+    }   
 
 }
